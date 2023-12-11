@@ -101,20 +101,20 @@ public class AdicionarExemplar extends javax.swing.JFrame {
 
         tableExemplar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Livro", "Disponível"
+                "Livro", "Edição", "Disponível"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -304,7 +304,9 @@ public class AdicionarExemplar extends javax.swing.JFrame {
             for (Copy copy : copies) {
                 Object[] rowData = {
                     copy.getBook().getTitle(),
-                    copy.isDisponivel(),};
+                    copy.getBook().getEdition(),
+                    copy.isDisponivel()
+                };
                 model.addRow(rowData);
             }
 
