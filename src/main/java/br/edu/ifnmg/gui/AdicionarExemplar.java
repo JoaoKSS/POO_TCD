@@ -10,6 +10,7 @@ import br.edu.ifnmg.copy.Copy;
 import br.edu.ifnmg.copy.CopyDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -31,6 +32,7 @@ public class AdicionarExemplar extends javax.swing.JFrame {
         lblNenhum.setVisible(false);
         updateBookTable();
         updateCopyTable();
+        ocultarColunaId();
     }
 
     public static AdicionarExemplar getInstance() {
@@ -39,6 +41,15 @@ public class AdicionarExemplar extends javax.swing.JFrame {
         }
         instance.setAlwaysOnTop(true);
         return instance;
+    }
+
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableLivro.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**

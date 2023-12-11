@@ -4,12 +4,12 @@
  */
 package br.edu.ifnmg.gui;
 
-import br.edu.ifnmg.gui.*;
 import br.edu.ifnmg.commets.Comments;
 import br.edu.ifnmg.commets.CommentsDao;
 import br.edu.ifnmg.credential.Credential;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -24,7 +24,6 @@ public class DeleteComentarios extends javax.swing.JFrame {
     public static Credential cred = null;
 
 //    private Long selectedCommentId;
-
     public DeleteComentarios() {
         initComponents();
         // Centralização da janela
@@ -32,14 +31,23 @@ public class DeleteComentarios extends javax.swing.JFrame {
         lblApagado.setVisible(false);
         lblSelecione.setVisible(false);
         DeleteComentariosTable();
+        ocultarColunaId();
     }
 
     public static DeleteComentarios getInstance() {
         if (instance == null) {
             instance = new DeleteComentarios();
         }
-
         return instance;
+    }
+
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableDelComentarios.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**
@@ -181,7 +189,7 @@ public class DeleteComentarios extends javax.swing.JFrame {
 //            DeleteComentarios(selectedCommentId);
             Long selectedId = (Long) tableDelComentarios.getValueAt(selectedRow, 0);
             DeleteComentarios(selectedId);
-            
+
             DeleteComentariosTable();
         } else {
             System.out.println("Selecione pelo menos um comentário antes de apagar.");
@@ -213,7 +221,7 @@ public class DeleteComentarios extends javax.swing.JFrame {
                         int selectedRow = tableDelComentarios.getSelectedRow();
                         if (selectedRow != -1) {
 //                            selectedCommentId = comments.getId();
-                            
+
                             lblSelecione.setVisible(false);
                             lblApagado.setVisible(false);
                         }

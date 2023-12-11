@@ -36,6 +36,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 //        
         if (current_cred.getUser().getRole().getName().equals("administrador")) {
             instance.menuVerUsuario.setVisible(true);
+            instance.menuAtualizaUsuario.setVisible(true);
             instance.menuSair.setVisible(true);
             instance.menuEncerrar.setVisible(true);
             instance.menuCadUsuario.setVisible(true);
@@ -56,6 +57,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         } else if (current_cred.getUser().getRole().getName().equals("bibliotecário")) {
             instance.menuVerUsuario.setVisible(true);
+            instance.menuAtualizaUsuario.setVisible(false);
             instance.menuSair.setVisible(true);
             instance.menuEncerrar.setVisible(true);
             instance.menuCadUsuario.setVisible(false);
@@ -76,6 +78,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         } else if (current_cred.getUser().getRole().getName().equals("leitor")) {
             instance.menuVerUsuario.setVisible(true);
+            instance.menuAtualizaUsuario.setVisible(false);
             instance.menuSair.setVisible(true);
             instance.menuEncerrar.setVisible(true);
             instance.menuCadUsuario.setVisible(false);
@@ -119,7 +122,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menu = new javax.swing.JMenuBar();
         menuUsuario = new javax.swing.JMenu();
         menuVerUsuario = new javax.swing.JMenuItem();
-        menuVerUsuario1 = new javax.swing.JMenuItem();
+        menuAtualizaUsuario = new javax.swing.JMenuItem();
         menuCadUsuario = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenuItem();
         menuEncerrar = new javax.swing.JMenuItem();
@@ -177,13 +180,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuUsuario.add(menuVerUsuario);
 
-        menuVerUsuario1.setText("Atualizar Usuários");
-        menuVerUsuario1.addActionListener(new java.awt.event.ActionListener() {
+        menuAtualizaUsuario.setText("Atualizar Usuários");
+        menuAtualizaUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuVerUsuario1ActionPerformed(evt);
+                menuAtualizaUsuarioActionPerformed(evt);
             }
         });
-        menuUsuario.add(menuVerUsuario1);
+        menuUsuario.add(menuAtualizaUsuario);
 
         menuCadUsuario.setText("Cadrastro de Usuário");
         menuCadUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -419,9 +422,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Comentarios.getInstance().setVisible(true);
     }//GEN-LAST:event_menuCommentsActionPerformed
 
-    private void menuVerUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVerUsuario1ActionPerformed
+    private void menuAtualizaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAtualizaUsuarioActionPerformed
         AtualizaUsuario.getInstance().setVisible(true);
-    }//GEN-LAST:event_menuVerUsuario1ActionPerformed
+    }//GEN-LAST:event_menuAtualizaUsuarioActionPerformed
 
     private void menuCadExempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadExempActionPerformed
         AdicionarExemplar.getInstance().setVisible(true);
@@ -496,6 +499,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuAtuaComentarios;
     private javax.swing.JMenuItem menuAtualiza;
     private javax.swing.JMenuItem menuAtualizaExemp;
+    private javax.swing.JMenuItem menuAtualizaUsuario;
     private javax.swing.JMenuItem menuAutoEmp;
     private javax.swing.JMenu menuBook;
     private javax.swing.JMenuItem menuCadEmp;
@@ -513,6 +517,5 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuSair;
     private javax.swing.JMenu menuUsuario;
     private javax.swing.JMenuItem menuVerUsuario;
-    private javax.swing.JMenuItem menuVerUsuario1;
     // End of variables declaration//GEN-END:variables
 }

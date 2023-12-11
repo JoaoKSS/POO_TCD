@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -31,6 +32,7 @@ public class EmprestarLivro extends javax.swing.JFrame {
         // Centralização da janela
         setLocationRelativeTo(null);
         updateBookTable();
+        ocultarColunaId();
     }
 
     public static EmprestarLivro getInstance() {
@@ -39,6 +41,15 @@ public class EmprestarLivro extends javax.swing.JFrame {
         }
         instance.setAlwaysOnTop(true);
         return instance;
+    }
+
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableLivro.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**

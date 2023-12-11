@@ -4,11 +4,11 @@
  */
 package br.edu.ifnmg.gui;
 
-import br.edu.ifnmg.gui.*;
 import br.edu.ifnmg.copy.Copy;
 import br.edu.ifnmg.copy.CopyDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -28,6 +28,7 @@ public class DeleteExemplar extends javax.swing.JFrame {
         lblDel.setVisible(false);
         lblSelecione.setVisible(false);
         DeleteCopyTable();
+        ocultarColunaId();
     }
 
     public static DeleteExemplar getInstance() {
@@ -36,6 +37,15 @@ public class DeleteExemplar extends javax.swing.JFrame {
         }
         instance.setAlwaysOnTop(true);
         return instance;
+    }
+
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableDelExemplar.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**
@@ -49,7 +59,7 @@ public class DeleteExemplar extends javax.swing.JFrame {
 
         lblTdsExemp = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableExemplar = new javax.swing.JTable();
+        tableDelExemplar = new javax.swing.JTable();
         btnDelExemp = new javax.swing.JButton();
         lblDel = new javax.swing.JLabel();
         lblSelecione = new javax.swing.JLabel();
@@ -65,7 +75,7 @@ public class DeleteExemplar extends javax.swing.JFrame {
         lblTdsExemp.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         lblTdsExemp.setText("Exemplares");
 
-        tableExemplar.setModel(new javax.swing.table.DefaultTableModel(
+        tableDelExemplar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -91,8 +101,8 @@ public class DeleteExemplar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableExemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(tableExemplar);
+        tableDelExemplar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(tableDelExemplar);
 
         btnDelExemp.setText("Apagar Exemplares");
         btnDelExemp.addActionListener(new java.awt.event.ActionListener() {
@@ -163,9 +173,9 @@ public class DeleteExemplar extends javax.swing.JFrame {
 
     private void btnDelExempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelExempActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tableExemplar.getSelectedRow();
+        int selectedRow = tableDelExemplar.getSelectedRow();
         if (selectedRow != -1) {
-            Long selectedId = (Long) tableExemplar.getValueAt(selectedRow, 0);
+            Long selectedId = (Long) tableDelExemplar.getValueAt(selectedRow, 0);
             deleteCopy(selectedId);
             DeleteCopyTable();
             lblSelecione.setVisible(false);
@@ -183,7 +193,7 @@ public class DeleteExemplar extends javax.swing.JFrame {
             CopyDao copyDao = new CopyDao();
             List<Copy> copies = copyDao.findAll();
 
-            DefaultTableModel model = (DefaultTableModel) tableExemplar.getModel();
+            DefaultTableModel model = (DefaultTableModel) tableDelExemplar.getModel();
             model.setRowCount(0);
 
             for (Copy copy : copies) {
@@ -262,6 +272,6 @@ public class DeleteExemplar extends javax.swing.JFrame {
     private javax.swing.JLabel lblDel;
     private javax.swing.JLabel lblSelecione;
     private javax.swing.JLabel lblTdsExemp;
-    private javax.swing.JTable tableExemplar;
+    private javax.swing.JTable tableDelExemplar;
     // End of variables declaration//GEN-END:variables
 }

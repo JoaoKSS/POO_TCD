@@ -15,7 +15,6 @@ import br.edu.ifnmg.role.Role;
 import br.edu.ifnmg.role.RoleDao;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +32,7 @@ public class CadrastroUsuario extends javax.swing.JFrame {
         // Centralização da janela
         setLocationRelativeTo(null);
         lblCadastro.setVisible(false);
+        lblIncorreto.setVisible(false);
     }
 
     public static CadrastroUsuario getInstance() {
@@ -82,6 +82,7 @@ public class CadrastroUsuario extends javax.swing.JFrame {
         calDate = new com.toedter.calendar.JDateChooser();
         boxPapel = new javax.swing.JComboBox<>();
         lblCadastro = new javax.swing.JLabel();
+        lblIncorreto = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -126,14 +127,12 @@ public class CadrastroUsuario extends javax.swing.JFrame {
         });
 
         boxPapel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Administrador", "Bibliotecário", "Leitor" }));
-        boxPapel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxPapelActionPerformed(evt);
-            }
-        });
 
         lblCadastro.setForeground(new java.awt.Color(0, 0, 255));
         lblCadastro.setText("Usuário Cadastrado!!");
+
+        lblIncorreto.setForeground(new java.awt.Color(240, 0, 0));
+        lblIncorreto.setText("Campos Indefinidos Troque-os!!");
 
         javax.swing.GroupLayout PanelCadrastroLayout = new javax.swing.GroupLayout(PanelCadrastro);
         PanelCadrastro.setLayout(PanelCadrastroLayout);
@@ -171,17 +170,20 @@ public class CadrastroUsuario extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtNome))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelCadrastroLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117)
+                        .addComponent(btnSalvar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelCadrastroLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(lblAniversario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PanelCadrastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(calDate, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PanelCadrastroLayout.createSequentialGroup()
-                                .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSalvar))
-                            .addGroup(PanelCadrastroLayout.createSequentialGroup()
-                                .addComponent(calDate, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 82, Short.MAX_VALUE)))))
+                                .addGap(14, 14, 14)
+                                .addComponent(lblIncorreto)))
+                        .addGap(0, 163, Short.MAX_VALUE)))
                 .addGap(45, 45, 45))
         );
         PanelCadrastroLayout.setVerticalGroup(
@@ -212,11 +214,13 @@ public class CadrastroUsuario extends javax.swing.JFrame {
                 .addGroup(PanelCadrastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAniversario)
                     .addComponent(calDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lblIncorreto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PanelCadrastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(lblCadastro))
-                .addGap(31, 31, 31))
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,8 +236,7 @@ public class CadrastroUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelCadrastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(PanelCadrastro, javax.swing.GroupLayout.PREFERRED_SIZE, 406, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,10 +272,9 @@ public class CadrastroUsuario extends javax.swing.JFrame {
                 new LibrarianDao().saveOrUpdate(L);
                 System.out.println("Bibliotecário Cadastrado!!");
                 instance.setAlwaysOnTop(false);
-                JOptionPane.showMessageDialog(null, "Bibliotecário Cadastrado!!");
                 lblCadastro.setVisible(true);
-                //this.setVisible(false);
-                //TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
+//                this.setVisible(false);
+//                TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
                 System.out.println(L.toString());
             } else if (boxPapel.getSelectedItem().toString().equals("Leitor")) {
                 Reader joao = null;
@@ -288,11 +290,10 @@ public class CadrastroUsuario extends javax.swing.JFrame {
                 joao = new ReaderDao().findById(user_id);
                 new ReaderDao().saveOrUpdate(joao);
                 instance.setAlwaysOnTop(false);
-                //JOptionPane.showMessageDialog(null, "Leitor Cadastrado!!");
                 System.out.println("Leitor Cadastrado!!");
                 lblCadastro.setVisible(true);
-                //this.setVisible(false);
-                //TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
+//                this.setVisible(false);
+//                TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
                 System.out.println(joao.toString());
             } else if (boxPapel.getSelectedItem().toString().equals("Administrador")) {
                 Adm adm = null;
@@ -308,11 +309,10 @@ public class CadrastroUsuario extends javax.swing.JFrame {
                 adm = new AdmDao().findById(user_id);
                 new AdmDao().saveOrUpdate(adm);
                 instance.setAlwaysOnTop(false);
-                //JOptionPane.showMessageDialog(null, "Administrador Cadastrado!!");
                 System.out.println("Administrador Cadastrado!!");
                 lblCadastro.setVisible(true);
-                //this.setVisible(false);
-                //TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
+//                this.setVisible(false);
+//                TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
                 System.out.println(adm.toString());
             }
             boxPapel.setSelectedIndex(0);
@@ -322,15 +322,12 @@ public class CadrastroUsuario extends javax.swing.JFrame {
             txtNome.setText("");
             txtEmail.setText("");
             calDate.setDate(null);
-            this.setVisible(false);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            lblIncorreto.setVisible(true);
+            lblCadastro.setVisible(false);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void boxPapelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxPapelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boxPapelActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -343,8 +340,9 @@ public class CadrastroUsuario extends javax.swing.JFrame {
         txtEmail.setText("");
         calDate.setDate(null);
         lblCadastro.setVisible(false);
-        this.setVisible(false);
-        TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
+        lblIncorreto.setVisible(false);
+//        this.setVisible(false);
+//        TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     /**
@@ -399,6 +397,7 @@ public class CadrastroUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblAniversario;
     private javax.swing.JLabel lblCadastro;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblIncorreto;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblPapel;
     private javax.swing.JLabel lblSenha;

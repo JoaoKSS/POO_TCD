@@ -10,6 +10,7 @@ import br.edu.ifnmg.commets.CommentsDao;
 import br.edu.ifnmg.credential.Credential;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -32,6 +33,7 @@ public class AtualizarComentarios extends javax.swing.JFrame {
         lblSelecione.setVisible(false);
         lblSoLeitores.setVisible(false);
         AtualizarComentariosTable();
+        ocultarColunaId();
     }
 
     public static AtualizarComentarios getInstance() {
@@ -40,6 +42,15 @@ public class AtualizarComentarios extends javax.swing.JFrame {
         }
 
         return instance;
+    }
+    
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableComentarios.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**
@@ -79,7 +90,7 @@ public class AtualizarComentarios extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id", "Titulo", "Autor", "Comentário"
+                "Id", "Titulo", "Autor", "Comentários"
             }
         ) {
             boolean[] canEdit = new boolean [] {

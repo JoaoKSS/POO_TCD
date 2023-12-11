@@ -6,10 +6,10 @@ package br.edu.ifnmg.gui;
 
 import br.edu.ifnmg.credential.Credential;
 import br.edu.ifnmg.credential.CredentialDao;
-import br.edu.ifnmg.gui.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -29,6 +29,7 @@ public class AtualizaUsuario extends javax.swing.JFrame {
         lblAtualizado.setVisible(false);
         lblSelecione.setVisible(false);
         updateUsuarioTable();
+        ocultarColunaId();
     }
 
     public static AtualizaUsuario getInstance() {
@@ -37,6 +38,15 @@ public class AtualizaUsuario extends javax.swing.JFrame {
         }
 
         return instance;
+    }
+
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableUsuario.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**
@@ -240,7 +250,7 @@ public class AtualizaUsuario extends javax.swing.JFrame {
         lblAtualizado.setVisible(false);
 
         this.setVisible(false);
-        TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
+//        TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     private void btnAtualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizaActionPerformed
@@ -260,8 +270,7 @@ public class AtualizaUsuario extends javax.swing.JFrame {
                     credential.getUser().getName(),
                     credential.getUser().getEmail(),
                     formattedDate,
-                    credential.getUser().getRole().getName(),
-                };
+                    credential.getUser().getRole().getName(),};
                 model.addRow(rowData);
             }
 

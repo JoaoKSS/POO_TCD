@@ -8,7 +8,9 @@ import br.edu.ifnmg.gui.*;
 import br.edu.ifnmg.copy.Copy;
 import br.edu.ifnmg.copy.CopyDao;
 import java.util.List;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -28,6 +30,7 @@ public class AtualizarExemplar extends javax.swing.JFrame {
         lblAtualizado.setVisible(false);
         lblSelecione.setVisible(false);
         AtualizaCopyTable();
+        ocultarColunaId();
     }
 
     public static AtualizarExemplar getInstance() {
@@ -36,6 +39,15 @@ public class AtualizarExemplar extends javax.swing.JFrame {
         }
         instance.setAlwaysOnTop(true);
         return instance;
+    }
+
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableExemplar.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**
@@ -144,6 +156,10 @@ public class AtualizarExemplar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public AtualizarExemplar(JTable tableExemplar) {
+        this.tableExemplar = tableExemplar;
+    }
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -167,7 +183,6 @@ public class AtualizarExemplar extends javax.swing.JFrame {
             System.out.println("Selecione um exemplar antes de atualizar.");
             lblSelecione.setVisible(true);
         }
-
     }//GEN-LAST:event_btnAtualizaExempActionPerformed
 
     private void AtualizaCopyTable() {

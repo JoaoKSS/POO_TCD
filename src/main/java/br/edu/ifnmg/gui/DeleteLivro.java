@@ -8,6 +8,7 @@ import br.edu.ifnmg.book.Book;
 import br.edu.ifnmg.book.BookDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -27,6 +28,7 @@ public class DeleteLivro extends javax.swing.JFrame {
         lblApagado.setVisible(false);
         lblSelecione.setVisible(false);
         DeleteBookTable();
+        ocultarColunaId();
     }
 
     public static DeleteLivro getInstance() {
@@ -35,6 +37,15 @@ public class DeleteLivro extends javax.swing.JFrame {
         }
         instance.setAlwaysOnTop(true);
         return instance;
+    }
+
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableDelLivro.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**
@@ -48,7 +59,7 @@ public class DeleteLivro extends javax.swing.JFrame {
 
         panelDelete = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableLivro = new javax.swing.JTable();
+        tableDelLivro = new javax.swing.JTable();
         lblTdsLivros = new javax.swing.JLabel();
         lblApagado = new javax.swing.JLabel();
         lblSelecione = new javax.swing.JLabel();
@@ -62,7 +73,7 @@ public class DeleteLivro extends javax.swing.JFrame {
             }
         });
 
-        tableLivro.setModel(new javax.swing.table.DefaultTableModel(
+        tableDelLivro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -81,7 +92,7 @@ public class DeleteLivro extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableLivro);
+        jScrollPane1.setViewportView(tableDelLivro);
 
         lblTdsLivros.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         lblTdsLivros.setText("Livros Cadrastrados");
@@ -170,10 +181,10 @@ public class DeleteLivro extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tableLivro.getSelectedRow();
+        int selectedRow = tableDelLivro.getSelectedRow();
         if (selectedRow != -1) {
             // Obtém o título da coluna 'Titulo' na linha clicada
-            Long selectedId = (Long) tableLivro.getValueAt(selectedRow, 0);
+            Long selectedId = (Long) tableDelLivro.getValueAt(selectedRow, 0);
             deleteBook(selectedId);
             DeleteBookTable();
         } else {
@@ -187,7 +198,7 @@ public class DeleteLivro extends javax.swing.JFrame {
             BookDao bookDao = new BookDao();
             List<Book> books = bookDao.findAll();
 
-            DefaultTableModel model = (DefaultTableModel) tableLivro.getModel();
+            DefaultTableModel model = (DefaultTableModel) tableDelLivro.getModel();
             model.setRowCount(0);
 
             for (Book book : books) {
@@ -267,6 +278,6 @@ public class DeleteLivro extends javax.swing.JFrame {
     private javax.swing.JLabel lblSelecione;
     private javax.swing.JLabel lblTdsLivros;
     private javax.swing.JPanel panelDelete;
-    private javax.swing.JTable tableLivro;
+    private javax.swing.JTable tableDelLivro;
     // End of variables declaration//GEN-END:variables
 }

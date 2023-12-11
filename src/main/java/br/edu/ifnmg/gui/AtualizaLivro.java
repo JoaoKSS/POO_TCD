@@ -4,10 +4,12 @@
  */
 package br.edu.ifnmg.gui;
 
+import br.edu.ifnmg.gui.*;
 import br.edu.ifnmg.book.Book;
 import br.edu.ifnmg.book.BookDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -28,6 +30,7 @@ public class AtualizaLivro extends javax.swing.JFrame {
         lblAtualizado.setVisible(false);
         lblSelecione.setVisible(false);
         updateBookTable();
+        ocultarColunaId();
     }
 
     public static AtualizaLivro getInstance() {
@@ -36,6 +39,15 @@ public class AtualizaLivro extends javax.swing.JFrame {
         }
         instance.setAlwaysOnTop(true);
         return instance;
+    }
+    
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableLivro.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**

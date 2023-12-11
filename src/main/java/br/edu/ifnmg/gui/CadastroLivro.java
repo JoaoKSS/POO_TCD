@@ -89,12 +89,6 @@ public class CadastroLivro extends javax.swing.JFrame {
 
         lblUsuario.setText("Titulo:");
 
-        txtTitulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTituloActionPerformed(evt);
-            }
-        });
-
         lblSenha.setText("Autor:");
 
         btnSalvar.setText("Salvar");
@@ -175,12 +169,14 @@ public class CadastroLivro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(PanelCadrastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelCadrastroLivroLayout.createSequentialGroup()
-                        .addComponent(btnSalvar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(PanelCadrastroLivroLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblIncorreto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblCadastrado))))
+                        .addGap(34, 34, 34))
+                    .addGroup(PanelCadrastroLivroLayout.createSequentialGroup()
+                        .addGroup(PanelCadrastroLivroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCadastrado)
+                            .addComponent(btnSalvar))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -196,16 +192,11 @@ public class CadastroLivro extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelCadrastroLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(PanelCadrastroLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTituloActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 //         TODO add your handling code here:
@@ -223,13 +214,12 @@ public class CadastroLivro extends javax.swing.JFrame {
             book1Id = new BookDao().saveOrUpdate(livro);
             livro.setId(book1Id);
             instance.setAlwaysOnTop(false);
-            //JOptionPane.showMessageDialog(null, "Livro Cadastrado!!");
             System.out.println("Livro Cadastrado!!");
             System.out.println(livro.toString());
             lblIncorreto.setVisible(false);
             lblCadastrado.setVisible(true);
-            this.setVisible(false);
-            //TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
+//            this.setVisible(false);
+//            TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -246,6 +236,8 @@ public class CadastroLivro extends javax.swing.JFrame {
         txtPaginas.setText("");
         txtYear.setText("");
         txtEdition.setText("");
+        lblIncorreto.setVisible(false);
+        lblCadastrado.setVisible(false);
         this.setVisible(false);
         //TelaPrincipal.getInstance(TelaPrincipal.current_cred).setVisible(true);
     }//GEN-LAST:event_formWindowClosing

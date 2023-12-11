@@ -8,6 +8,7 @@ import br.edu.ifnmg.book.Book;
 import br.edu.ifnmg.book.BookDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -25,6 +26,7 @@ public class VisualizarLivros extends javax.swing.JFrame {
         // Centralização da janela
         setLocationRelativeTo(null);
         ViewBookTable();
+        ocultarColunaId();
     }
 
     public static VisualizarLivros getInstance() {
@@ -33,6 +35,15 @@ public class VisualizarLivros extends javax.swing.JFrame {
         }
         instance.setAlwaysOnTop(true);
         return instance;
+    }
+    
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableLivro.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**
@@ -50,7 +61,7 @@ public class VisualizarLivros extends javax.swing.JFrame {
         lblTdsLivros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Apagar Livro");
+        setTitle("Livros Cadastrados");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -59,17 +70,17 @@ public class VisualizarLivros extends javax.swing.JFrame {
 
         tableLivro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Titulo", "Autor", "Páginas", "Ano", "Edição"
+                "Id", "Titulo", "Autor", "Páginas", "Ano", "Edição"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                true, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -145,7 +156,7 @@ public class VisualizarLivros extends javax.swing.JFrame {
                     book.getAuthors(),
                     book.getPages(),
                     book.getYear(),
-                    book.getEdition()
+                    book.getEdition(),
                 };
                 model.addRow(rowData);
             }

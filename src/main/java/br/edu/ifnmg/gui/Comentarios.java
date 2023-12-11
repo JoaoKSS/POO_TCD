@@ -4,7 +4,6 @@
  */
 package br.edu.ifnmg.gui;
 
-import br.edu.ifnmg.gui.*;
 import br.edu.ifnmg.book.Book;
 import br.edu.ifnmg.book.BookDao;
 import br.edu.ifnmg.commets.Comments;
@@ -14,6 +13,7 @@ import br.edu.ifnmg.reader.Reader;
 import br.edu.ifnmg.reader.ReaderDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -36,6 +36,7 @@ public class Comentarios extends javax.swing.JFrame {
         lblSelecione.setVisible(false);
         lblSoLeitores.setVisible(false);
         comentariosBookTable();
+        ocultarColunaId();
     }
 
     public static Comentarios getInstance() {
@@ -44,6 +45,15 @@ public class Comentarios extends javax.swing.JFrame {
         }
 
         return instance;
+    }
+    
+    private void ocultarColunaId() {
+        int columnIndex = 0;
+        TableColumn colunaId = tableComentarios.getColumnModel().getColumn(columnIndex);
+        colunaId.setMinWidth(0);
+        colunaId.setMaxWidth(0);
+        colunaId.setPreferredWidth(0);
+        colunaId.setResizable(false);
     }
 
     /**
